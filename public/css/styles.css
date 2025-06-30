@@ -1,6 +1,185 @@
+/* page root colors  */
+:root {
+  --black-color: #000;
+  --white-color: #fff;
+  --green-color: green;
+
+}
 /******* Change Box Model ***************/
 *,
 *:before,
 *:after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-size: 24px;
+  font-family: "Roboto", sans-serif;
+}
+
+/* Header section */
+#wrapper #top-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 50px 10px;
+}
+
+#top-header .siteName a {
+  font-size: 35px;
+  text-decoration: none;
+  color: var(--black-color);
+}
+
+#top-header #tools a {
+  text-decoration: none;
+  color: var(--black-color);
+  font-size: larger;
+}
+
+/* Navigation section */
+#wrapper nav {
+  background-color: var(--black-color);
+  padding: 40px 20px;
+  color: var(--white-color);
+}
+
+nav ul {
+  display: flex;
+  justify-content: space-between ;
+  align-items: center;
+  list-style: none;
+}
+
+/* Body section */
+main {
+  margin-top: 50px;
+}
+
+main .hero-img {
+  position: relative;
+  margin: 20px 0;
+  height: 60vh;
+}
+
+.hero-img h1{
+  margin: 10px 10px;
+  font-size: 33px;
+}
+
+.inner-text {
+  position: absolute;
+  color: white;
+  z-index: 1;
+  top: 100px;
+  line-height: 40px;
+  left: 10px;
+  background-color: rgba(0.8, 0.8, 0.8, 0.8);
+  padding: 20px 10px;
+  max-width: 100%;
+}
+
+.inner-text h2 {
+  font: bold;
+}
+.inner-text ul {
+  list-style: none;
+  margin-bottom: 15px;
+}
+
+.inner-text a {
+  background-color: var(--green-color);
+  color: var(--white-color);
+  text-decoration: none;
+  padding: 10px 10px;
+}
+
+.hero-img img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  height: 60vh;
+}
+
+/* Section Class */
+.section {
+  margin: 150px 10px;
+  display: grid;
+  gap: 30px;
+  grid-template-areas: 
+  "reviews"
+  "upgrades";
+}
+
+/* Aside Class */
+.aside {
+  grid-area: upgrades;
+}
+
+.upgrades {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+figure div {
+  background-color: var(--green-color);
+  display: flex;
+  place-content: center;
+  padding: 10px 10px;
+}
+
+figure img {
+  max-width: 100%;
+  height: 100%;
+  object-fit: contain;
+  width: 100px;
+  height: 100px;
+}
+
+figcaption {
+  color: var(--black-color);
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+/* Section reviews class */
+.section-reviews {
+  grid-area: reviews;
+}
+
+.section-reviews h3, .aside h3 {
+  font-weight: bold;
+  font-size: 28px;
+}
+
+.section-reviews ul {
+  line-height: 60px;
+  margin: 20px 20px;
+}
+
+/* Footer */
+footer {
+  padding: 0 10px 30px;
+}
+
+/* Media query */
+@media screen and (min-width: 1025px) {
+  nav ul {
+    justify-content: space-evenly;
+  }
+  .section {
+    display: grid;
+    grid-template-areas: "upgrades reviews"
+    "upgrades reviews";
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+  }
+  .aside {
+    grid-area: upgrades;
+  }
+  .section-reviews {
+    grid-area: reviews;
+  }
 }
