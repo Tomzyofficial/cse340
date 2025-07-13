@@ -1,0 +1,16 @@
+#invDetailTitle {
+  padding: 10px;
+}
+#container {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.8em;
+}
+
+@media screen and (min-width: 1025px) {
+  #container {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}

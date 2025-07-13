@@ -1,0 +1,15 @@
+<!-- Content Header -->
+<% if (title) { %>
+<div class="error-container">
+  <h1 class="error-title">
+    <%= title %>
+  </h1>
+  <div class="error-message">
+    <p><%= message %></p>
+  </div>
+  <div class="error-actions">
+    <a href="/" class="btn btn-primary">Return to Home</a>
+    <a href="javascript:history.back()" class="btn btn-secondary">Go Back</a>
+  </div>
+</div>
+<% } else { res.redirect('/') } %>

@@ -1,0 +1,11 @@
+<!-- Content Header -->
+<% if (title) { %>
+  <h1 id="invClassificationTitle">
+    <%= title %>
+  </h1>
+<% } else { res.redirect('/') } %>
+
+<%# messages() %>
+
+<!-- Inventory items display -->
+<%- grid %>
