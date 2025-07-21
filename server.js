@@ -19,11 +19,17 @@ const utilities = require("./utilities/")
 /* ***********************
  * View Engine and Templates
  *************************/
-
-
 app.set("view engine", "ejs")
 app.use(expressLayouts)
 app.set("layout", "./layouts/layout") // not at views root
+
+/*******************************
+ * Middleware for body parsing
+ *******************************/
+app.use(express.urlencoded({ extended: true })) // for form submissions
+app.use(express.json()) // for JSON data
+
+
 /* ***********************
  * Routes
  *************************/

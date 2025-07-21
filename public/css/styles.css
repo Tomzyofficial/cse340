@@ -3,7 +3,6 @@
   --black-color: #000;
   --white-color: #fff;
   --green-color: green;
-
 }
 /******* Change Box Model ***************/
 *,
@@ -17,11 +16,11 @@
 }
 
 /* Header section */
-#wrapper #top-header{
+#top-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 50px 10px;
+  padding: 20px 10px;
 }
 
 #top-header .siteName a {
@@ -37,27 +36,65 @@
 }
 
 /* Navigation section */
-#wrapper nav {
+#nav {
+  position: relative;
   background-color: var(--black-color);
-  padding: 40px 20px;
+  padding: 20px 20px;
   color: var(--white-color);
 }
 
-nav #nav_ul {
-  display: flex;
-  justify-content: space-between ;
-  align-items: center;
+#nav_ul {
+  top: 25vh;
+  left: -100%;
+  width: 80vw;
+  position: fixed;
+  z-index: 2;
+  padding: 10px 10px;
+  line-height: 30px;
+  background-color: var(--black-color);
   list-style: none;
 }
 #nav_ul li a {
   color: var(--white-color);
   text-decoration: none;
-  transition: all .5s ease;
+  transition: all 0.5s ease;
   padding: 5px;
+  display: block;
 }
-#nav_ul li:hover a {
-  color: #ccc;
-  border: 1px solid #ccc;
+#nav_ul li a:hover {
+  text-decoration: underline;
+}
+#nav_ul.active {
+  left: 0;
+  animation: fadeInNav 0.3s;
+}
+@keyframes fadeInNav {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.menubar {
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1;
+  transition: transform 0.3s;
+}
+.menubar.active img {
+  transform: rotate(90deg) scale(1.1);
+  filter: brightness(0.7) sepia(1) hue-rotate(90deg) saturate(2);
+}
+.menubar img {
+  width: 36px;
+  height: 36px;
+  display: block;
+  transition: filter 0.3s, transform 0.3s;
 }
 
 /* Body section */
@@ -72,7 +109,7 @@ main .hero-img {
   max-width: 100%;
 }
 
-.hero-img h1{
+.hero-img h1 {
   margin: 10px 10px;
   font-size: 33px;
 }
@@ -117,9 +154,9 @@ main .hero-img {
   margin: 150px 10px;
   display: grid;
   gap: 30px;
-  grid-template-areas: 
-  "reviews"
-  "upgrades";
+  grid-template-areas:
+    "reviews"
+    "upgrades";
 }
 
 /* Aside Class */
@@ -160,7 +197,8 @@ figcaption {
   grid-area: reviews;
 }
 
-.section-reviews h3, .aside h3 {
+.section-reviews h3,
+.aside h3 {
   font-weight: bold;
   font-size: 28px;
 }
@@ -173,26 +211,6 @@ figcaption {
 /* Footer */
 footer {
   padding: 0 10px 30px;
-}
-
-/* Media query */
-@media screen and (min-width: 1025px) {
-  nav ul {
-    justify-content: space-evenly;
-  }
-  .section {
-    display: grid;
-    grid-template-areas: "upgrades reviews"
-    "upgrades reviews";
-    grid-template-columns: 1fr 1fr;
-    gap: 50px;
-  }
-  .aside {
-    grid-area: upgrades;
-  }
-  .section-reviews {
-    grid-area: reviews;
-  }
 }
 
 /* Error Page Styling */
@@ -258,7 +276,7 @@ footer {
 }
 
 /* Notice styling for error messages */
-.notice {
+/* .notice {
   background-color: #f8d7da;
   color: #721c24;
   padding: 15px;
@@ -266,4 +284,58 @@ footer {
   border-radius: 5px;
   margin: 20px 0;
   text-align: center;
+} */
+
+/* Media query */
+@media screen and (min-width: 1025px) {
+  #nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  #nav_ul {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    list-style: none;
+    background: none;
+    position: inherit;
+    top: 0;
+    left: 0;
+    z-index: 0;
+  }
+  #nav_ul li {
+    transition: color 0.3s, background 0.3s, border-radius 0.3s;
+  }
+  #nav_ul li a {
+    border: 1px solid transparent;
+    border-radius: 10px;
+  }
+
+  #nav_ul li a:hover,
+  #nav_ul li a:focus {
+    color: var(--green-color);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: white;
+    text-decoration: none;
+  }
+  .menubar {
+    display: none;
+  }
+
+  .section {
+    display: grid;
+    grid-template-areas:
+      "upgrades reviews"
+      "upgrades reviews";
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+  }
+  .aside {
+    grid-area: upgrades;
+  }
+  .section-reviews {
+    grid-area: reviews;
+  }
 }
