@@ -65,7 +65,7 @@ invCont.buildManagement = async function (req, res, next) {
   res.render("./inventory/management", {
     title: "Management",
     nav,
-    message: req.flash ? req.flash("notice") : null,
+    message: [],
   });
 };
 
@@ -77,7 +77,7 @@ invCont.buildAddClassification = async function (req, res, next) {
   res.render("./inventory/add-classification", {
     title: "Add New Classification",
     nav,
-    message: req.flash ? req.flash("notice") : null,
+    message: [],
     errors: [],
   });
 };
@@ -89,6 +89,7 @@ invCont.addClassification = async function (req, res, next) {
   let nav = await utilities.getNav();
   const { classification_name } = req.body;
   let errors = [];
+  let message = [];
   // Server-side validation: only letters and numbers, no spaces or special characters
   if (!classification_name || !/^[A-Za-z0-9]+$/.test(classification_name)) {
     errors.push(
@@ -108,14 +109,22 @@ invCont.addClassification = async function (req, res, next) {
   }
   try {
     const result = await invModel.addClassification(classification_name);
+    nav = await utilities.getNav();
     if (result) {
-      // req.flash && req.flash("notice", "Classification added successfully!");
-      nav = await utilities.getNav();
-      return res.render("./inventory/management", {
-        title: "Inventory Management",
-        nav,
-        message: "Classification added successfully!",
-      });
+      message.push("Classification added successfully!");
+      if (message.length > 0) {
+        console.log("Classification added");
+        // req.flash && req.flash("notice", "Classification added successfully!");
+        return res.render("./inventory/management", {
+          title: "Classification item Added",
+          nav,
+          message,
+          errors: null,
+        });
+      } else {
+        console.log("Classification not added");
+        return;
+      }
     } else {
       return res.render("./inventory/add-classification", {
         title: "Add New Classification",
@@ -144,7 +153,7 @@ invCont.buildAddInventory = async function (req, res, next) {
     title: "Add New Inventory Item",
     nav,
     classificationList,
-    message: req.flash ? req.flash("notice") : null,
+    message: [],
     errors: [],
     sticky: {},
   });
@@ -160,6 +169,7 @@ invCont.addInventory = async function (req, res, next) {
     req.body.classification_id
   );
   let errors = [];
+  let message = [];
   // Server-side validation for all fields
   if (!req.body.classification_id) errors.push("Classification is required.");
   if (!req.body.inv_make) errors.push("Make is required.");
@@ -199,14 +209,22 @@ invCont.addInventory = async function (req, res, next) {
   }
   try {
     const result = await invModel.addInventoryItem(req.body);
+    nav = await utilities.getNav();
     if (result) {
       // req.flash && req.flash("notice", "Inventory item added successfully!");
-      nav = await utilities.getNav();
-      return res.render("./inventory/management", {
-        title: "Inventory Management",
-        nav,
-        message: "Inventory item added successfully!",
-      });
+      message.push("Inventory item added successfully!");
+      if (message.length > 0) {
+        console.log("Inventory added successfully");
+        return res.render("./inventory/management", {
+          title: "Inventory Item Added",
+          nav,
+          message,
+          errors: null,
+        });
+      } else {
+        console.log("Inventory Not Added");
+        return;
+      }
     } else {
       return res.render("./inventory/add-inventory", {
         title: "Add New Inventory Item",

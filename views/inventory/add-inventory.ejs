@@ -1,6 +1,6 @@
 <% if (title) { %>
 <h1 id="title"><%= title %></h1>
-<% } %> <% if (message) { %>
+<% } %> <% if (message && message.length > 0) { %>
 <div class="flash-message"><%= message %></div>
 <% } %> <% if (errors && errors.length > 0) { %>
 <ul class="error-list">
@@ -131,7 +131,8 @@
   <button type="submit">Add Vehicle</button>
 </form>
 
-<!-- <script>
+<!-- Client side validation -->
+<script>
   document
     .getElementById("addInventoryForm")
     .addEventListener("submit", function (e) {
@@ -150,7 +151,7 @@
       ];
       requiredFields.forEach(function (field) {
         const el = document.getElementById(field);
-        if (el && !el.value) {
+        if (el && el.value.trim() === "") {
           valid = false;
           el.style.borderColor = "red";
         } else if (el) {
@@ -162,4 +163,4 @@
         alert("Please fill out all required fields.");
       }
     });
-</script> -->
+</script>

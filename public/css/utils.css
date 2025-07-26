@@ -45,6 +45,9 @@
   background: #fafbfc;
   transition: border 0.2s;
 }
+#addInventoryForm textarea {
+  resize: none;
+}
 
 #addInventoryForm input:focus,
 #addInventoryForm select:focus,

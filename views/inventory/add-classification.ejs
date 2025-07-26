@@ -1,6 +1,6 @@
 <% if (title) { %>
 <h1 id="title"><%= title %></h1>
-<% } %> <% if (message) { %>
+<% } %> <% if (message && message.length > 0) { %>
 <div class="flash-message"><%= message %></div>
 <% } %> <% if (errors && errors.length > 0) { %>
 <ul class="error-list">
@@ -32,3 +32,29 @@
   </span>
   <button type="submit">Add Classification</button>
 </form>
+
+<!-- Client side validation -->
+<script>
+  document
+    .getElementById("addClassificationForm")
+    .addEventListener("submit", function (e) {
+      const el = document.getElementById("classification_name");
+      const value = el.value.trim();
+      const pattern = /^[A-Za-z0-9]+$/;
+
+      let valid = true;
+
+      if (value === "") {
+        valid = false;
+        el.style.borderColor = "red";
+      } else if (!pattern.test(value)) {
+        valid = false;
+        el.style.borderColor = "";
+      }
+
+      if (!valid) {
+        e.preventDefault();
+        alert("Please fill out all required fields.");
+      }
+    });
+</script>
