@@ -17,9 +17,8 @@ const acctRoute = require("./routes/acctRoute");
 const baseController = require("./controllers/baseController");
 const utilities = require("./utilities/");
 const { requireEmployeeOrAdmin } = require("./middleware/auth");
-// Account update routes (POST for updating account info and password)
-const acctController = require("./controllers/acctController");
 
+app.set("trust proxy", 1); // trust first proxy
 /* ***********************
  * View Engine and Templates
  *************************/
@@ -69,20 +68,6 @@ app.use("/inv", requireEmployeeOrAdmin, inventoryRoute);
 
 // Account routes
 app.use("/account", acctRoute);
-
-// Update account information (POST)
-// app.post(
-// "/account/update-info/:account_id",
-// requireEmployeeOrAdmin, ndon't use here
-// utilities.handleErrors(acctController.updateAccount)
-// );
-
-// Update account password (POST)
-// app.post(
-// "/account/update-password/:account_id",
-// requireEmployeeOrAdmin,
-// utilities.handleErrors(acctController.updatePassword)
-// );
 
 // Logout controller
 app.post("/logout", (req, res) => {

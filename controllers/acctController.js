@@ -319,7 +319,7 @@ acctController.handleLoginPost = async function (req, res, next) {
 
       res.cookie("jwt", token, {
         httpOnly: true,
-        secure: true,
+        secure: process.env.NODE_ENV === "production",
         sameSite: "lax",
         path: "/",
       });
