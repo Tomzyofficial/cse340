@@ -1,1 +1,3 @@
-SELECT * FROM public.inventory;
+SELECT * FROM public.account;
+
+DELETE FROM public.account ;

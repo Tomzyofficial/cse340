@@ -1,0 +1,60 @@
+:root {
+  --btn-bg-color: yellowgreen;
+  --btn-hover-color: green;
+  --white-color: white;
+  --black-color: #000;
+}
+
+#title {
+  margin-left: 10px;
+}
+
+fieldset {
+  margin: 0 auto;
+  max-width: 90%;
+  padding: 20px;
+}
+
+#createUserForm,
+#loginForm {
+  padding-top: 20px;
+  width: 100%;
+}
+
+div {
+  padding-top: 10px;
+}
+
+div label {
+  display: block;
+}
+
+div input {
+  width: 100%;
+  padding: 5px;
+}
+
+#signup-btn,
+#login-btn {
+  width: 100%;
+  background-color: var(--btn-bg-color);
+  cursor: pointer;
+  padding: 5px;
+  outline: none;
+  border: none;
+  transition: background 0.2s ease-in;
+  border-radius: 5px;
+  color: var(--black-color);
+}
+
+#signup-btn:hover,
+#login-btn:hover {
+  background-color: var(--btn-hover-color);
+  color: var(--white-color);
+}
+
+@media screen and (min-width: 991px) {
+  fieldset {
+    width: 50%;
+  }
+}

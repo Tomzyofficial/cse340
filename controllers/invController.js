@@ -10,7 +10,7 @@ invCont.buildByClassificationId = async function (req, res, next) {
   const classification_id = req.params.classificationId;
   const data = await invModel.getInventoryByClassificationId(classification_id);
 
-  if (!data || data.length === 0) {
+  if (!data || data.length < 1) {
     let nav = await utilities.getNav();
     res.render("./inventory/classification", {
       title: "No Vehicles Found",
@@ -66,6 +66,7 @@ invCont.buildManagement = async function (req, res, next) {
     title: "Management",
     nav,
     message: [],
+    errors: [],
   });
 };
 
@@ -88,8 +89,10 @@ invCont.buildAddClassification = async function (req, res, next) {
 invCont.addClassification = async function (req, res, next) {
   let nav = await utilities.getNav();
   const { classification_name } = req.body;
+
   let errors = [];
   let message = [];
+
   // Server-side validation: only letters and numbers, no spaces or special characters
   if (!classification_name || !/^[A-Za-z0-9]+$/.test(classification_name)) {
     errors.push(
@@ -107,6 +110,8 @@ invCont.addClassification = async function (req, res, next) {
       errors,
     });
   }
+
+  // If there were no errors from validation proceed to add classification
   try {
     const result = await invModel.addClassification(classification_name);
     nav = await utilities.getNav();
@@ -122,7 +127,7 @@ invCont.addClassification = async function (req, res, next) {
           errors: null,
         });
       } else {
-        console.log("Classification not added");
+        console.log("Classification was not added");
         return;
       }
     } else {
@@ -207,6 +212,8 @@ invCont.addInventory = async function (req, res, next) {
       sticky,
     });
   }
+
+  // If there were no errors from validation, proceed to add inventory
   try {
     const result = await invModel.addInventoryItem(req.body);
     nav = await utilities.getNav();

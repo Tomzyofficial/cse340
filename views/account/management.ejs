@@ -1,0 +1,22 @@
+<% if (isLoggedIn && account.account_type === "Client") { %>
+<h1><%= title %></h1>
+<h2>Welcome <%= account.account_firstname %></h2>
+<a href="/account/update/<%= account.account_id %>"
+  >Update Account Information</a
+>
+<% } else if (isLoggedIn && (account.account_type === "Employee" ||
+account.account_type === "Admin")) { %>
+<h1><%= title %></h1>
+<h2>Welcome <%= account.account_firstname %></h2>
+<a href="/account/update/<%= account.account_id %>"
+  >Update Account Information</a
+>
+<h3>Inventory Management</h3>
+<p>
+  <a href="/inv/management">Go to Inventory Management</a>
+</p>
+<% } %> <% if (message.length > 0) { %>
+<div id="flash-message">
+  <div><%= message %></div>
+</div>
+<% } %>

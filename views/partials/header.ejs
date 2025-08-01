@@ -3,6 +3,25 @@
     <a href="/" title="Return to home page">CSE Motors</a>
   </span>
   <div id="tools">
-    <a title="Click to log in" href="#">My Account</a>
+    <% if (isLoggedIn && account) { %>
+    <!-- Welcome link to account management, only when logged in -->
+    <a href="/account/management" id="welcome-link"> Welcome Basic </a>
+    <!-- Logout form, only when logged in -->
+    <form
+      id="logout-form"
+      action="/logout"
+      method="POST"
+      style="display: inline"
+    >
+      <button id="logout-btn" type="submit" aria-label="Log out">
+        Log out
+      </button>
+    </form>
+    <% } else { %>
+    <!-- My account link, only when NOT logged in -->
+    <a title="Click to log in" href="/account/login" id="my-account-link"
+      >My Account</a
+    >
+    <% } %>
   </div>
 </header>

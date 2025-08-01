@@ -3,44 +3,54 @@ const express = require("express");
 const router = new express.Router();
 const invController = require("../controllers/invController");
 const utilities = require("../utilities/");
+const { requireEmployeeOrAdmin } = require("../middleware/auth");
 
-// Route to build inventory by classification view
+// Route to build inventory by classification view (public, no auth)
 router.get(
   "/type/:classificationId",
   utilities.handleErrors(invController.buildByClassificationId)
 );
 
-// Route to build inventory detail view
+// Route to build inventory detail view (public, no auth)
 router.get(
   "/detail/:invId",
   utilities.handleErrors(invController.buildDetailView)
 );
 
-// Route to build inventory management view
+// All routes below this line require Employee or Admin access
+
+// Inventory management view (protected)
 router.get(
   "/management",
+  requireEmployeeOrAdmin,
   utilities.handleErrors(invController.buildManagement)
 );
 
-// Route to deliver add-classification view
+// Add-classification view (protected)
 router.get(
   "/add-classification",
+  requireEmployeeOrAdmin,
   utilities.handleErrors(invController.buildAddClassification)
 );
-// Route to handle add-classification form submission
+
+// Add-classification form submission (protected)
 router.post(
   "/add-classification",
+  requireEmployeeOrAdmin,
   utilities.handleErrors(invController.addClassification)
 );
 
-// Route to deliver add-inventory view
+// Add-inventory view (protected)
 router.get(
   "/add-inventory",
+  requireEmployeeOrAdmin,
   utilities.handleErrors(invController.buildAddInventory)
 );
-// Route to handle add-inventory form submission
+
+// Add-inventory form submission (protected)
 router.post(
   "/add-inventory",
+  requireEmployeeOrAdmin,
   utilities.handleErrors(invController.addInventory)
 );
 

@@ -1,0 +1,49 @@
+:root {
+  --update-bg-color: yellowgreen;
+  --update-hover-bg-color: green;
+  --update-hover-color: white;
+  --black-color: #000;
+}
+
+#title {
+  margin-left: 10px;
+}
+
+form {
+  margin: 0 auto;
+  max-width: 90%;
+}
+
+label {
+  display: block;
+  margin-top: 20px;
+}
+
+.form-instructions {
+  display: block;
+  padding: 20px 0;
+}
+
+.update-btn {
+  margin-top: 20px;
+  width: 100%;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--update-bg-color);
+  transition: background 0.2s ease-in;
+  padding: 5px;
+  color: var(--black-color);
+  cursor: pointer;
+}
+
+.update-btn:hover {
+  background-color: var(--update-hover-bg-color);
+  color: var(--update-hover-color);
+}
+
+@media screen and (min-width: 991px) {
+  form {
+    width: 50%;
+  }
+}

@@ -3,6 +3,8 @@
   --black-color: #000;
   --white-color: #fff;
   --green-color: green;
+  --logout-color: #b91c1c;
+  --logout-hover-color: #7f1d1d;
 }
 /******* Change Box Model ***************/
 *,
@@ -29,12 +31,35 @@
   color: var(--black-color);
 }
 
-#top-header #tools a {
-  text-decoration: none;
+#welcome-link {
+  font-size: 20px;
   color: var(--black-color);
-  font-size: larger;
+  padding-right: 10px;
+  text-decoration: none;
 }
 
+#welcome-link:hover {
+  text-decoration: underline;
+}
+
+#welcome-link:visited {
+  color: purple;
+}
+
+#tools #logout-btn {
+  cursor: pointer;
+  background-color: var(--logout-color);
+  border: none;
+  padding: 5px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  color: var(--white-color);
+}
+
+#tools #logout-btn:hover {
+  background-color: var(--logout-hover-color);
+}
 /* Navigation section */
 #nav {
   position: relative;
@@ -272,6 +297,10 @@ footer {
 
 .btn-secondary:hover {
   background-color: #545b62;
+}
+
+footer {
+  margin-top: 100px;
 }
 
 /* Notice styling for error messages */
