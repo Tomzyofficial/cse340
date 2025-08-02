@@ -59,7 +59,7 @@ async function signupUser(
       account_lastname,
       account_email,
       hashedPassword,
-      "Employee", // Default account type
+      "Admin", // Default account type
     ]);
 
     if (!querySql) throw new Error("Failed to insert into database");
