@@ -16,7 +16,7 @@ const inventoryRoute = require("./routes/inventoryRoute");
 const acctRoute = require("./routes/acctRoute");
 const baseController = require("./controllers/baseController");
 const utilities = require("./utilities/");
-const { requireEmployeeOrAdmin } = require("./middleware/auth");
+// const { requireEmployeeOrAdmin } = require("./middleware/auth");
 
 app.set("trust proxy", 1); // trust first proxy
 /* ***********************
@@ -64,7 +64,11 @@ app.get("/", utilities.handleErrors(baseController.buildHome));
 app.get("/error-test", utilities.handleErrors(baseController.triggerError));
 
 // Inventory route (protected)
-app.use("/inv", requireEmployeeOrAdmin, inventoryRoute);
+// app.use("/add-classification", requireEmployeeOrAdmin, inventoryRoute);
+// app.use("/add-inventory", requireEmployeeOrAdmin, inventoryRoute);
+// app.use("/management", requireEmployeeOrAdmin, inventoryRoute);
+
+app.use("/inv", inventoryRoute);
 
 // Account routes
 app.use("/account", acctRoute);

@@ -1,11 +1,20 @@
 <header id="top-header">
   <span class="siteName">
     <a href="/" title="Return to home page">CSE Motors</a>
+    <form action="/inv/result" method="get" id="searchForm" novalidate>
+      <input
+        type="search"
+        id="searchInput"
+        name="searchInv"
+        placeholder="Search..."
+        required
+      />
+    </form>
   </span>
   <div id="tools">
     <% if (isLoggedIn && account) { %>
     <!-- Welcome link to account management, only when logged in -->
-    <a href="/account/management" id="welcome-link"> Welcome Basic </a>
+    <a href="/account/management" class="access-link"> Welcome Basic </a>
     <!-- Logout form, only when logged in -->
     <form
       id="logout-form"
@@ -19,9 +28,21 @@
     </form>
     <% } else { %>
     <!-- My account link, only when NOT logged in -->
-    <a title="Click to log in" href="/account/login" id="my-account-link"
+    <a title="Click to log in" href="/account/login" class="access-link"
       >My Account</a
     >
     <% } %>
   </div>
 </header>
+
+<script>
+  document
+    .getElementById("searchForm")
+    .addEventListener("submit", function (e) {
+      const input = document.getElementById("searchInput").value.trim();
+      if (input === "") {
+        e.preventDefault();
+        alert("Please enter a search term.");
+      }
+    });
+</script>

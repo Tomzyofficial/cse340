@@ -1,0 +1,11 @@
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } %>
+
+<main>
+  <% if (grid && grid.length > 0) { %>
+  <div class="search-results"><%- grid %></div>
+  <% } else { %>
+  <p class="notice">No vehicles found matching your search.</p>
+  <% } %>
+</main>

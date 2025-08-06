@@ -128,21 +128,6 @@ Util.buildInventoryDetail = async function (vehicle) {
   }
 };
 
-/**************** Build Mangement List **************** */
-/* Util.buildManagementList = async function () {
-  try {
-    let management = "";
-    management += '<ul class="management-links">';
-    management += '<li><a href="/inv/add-classification">Add New Classification</a></li>';
-    management += '<li><a href="/inv/add-inventory">Add New Inventory Item</a></li>';
-    management += '</ul>';
-    return management;
-  } catch (error) {
-    console.error("Error in buildManagement:", error);
-    return '<p class="notice">Sorry, there was an error displaying management data.</p>';
-  }
-}; */
-
 /******* Build Classification Select List ******** */
 Util.buildClassificationList = async function (classification_id = null) {
   let data = await invModel.getClassifications();
@@ -161,6 +146,63 @@ Util.buildClassificationList = async function (classification_id = null) {
   });
   classificationList += "</select>";
   return classificationList;
+};
+
+/*************** Build inventory search result view  ****************/
+Util.buildSearchView = async function (data) {
+  try {
+    let grid = "";
+    if (data && data.length > 0) {
+      grid = '<ul id="inv-display">';
+      data.forEach((vehicle) => {
+        grid += "<li>";
+        grid +=
+          '<a href="../../inv/detail/' +
+          vehicle.inv_id +
+          '" title="View ' +
+          vehicle.inv_make +
+          " " +
+          vehicle.inv_model +
+          ' details"><img src="' +
+          vehicle.inv_thumbnail +
+          '" alt="Image of ' +
+          vehicle.inv_make +
+          " " +
+          vehicle.inv_model +
+          ' on CSE Motors"></a>';
+        grid += '<div class="namePrice">';
+        grid += "<hr>";
+        grid += "<h2>";
+        grid +=
+          '<a href="../../inv/detail/' +
+          vehicle.inv_id +
+          '" title="View ' +
+          vehicle.inv_make +
+          " " +
+          vehicle.inv_model +
+          ' details">' +
+          vehicle.inv_make +
+          " " +
+          vehicle.inv_model +
+          "</a>";
+        grid += "</h2>";
+        grid +=
+          "<span>$" +
+          new Intl.NumberFormat("en-US").format(vehicle.inv_price) +
+          "</span>";
+        grid += "</div>";
+        grid += "</li>";
+      });
+      grid += "</ul>";
+    } else {
+      grid =
+        '<p class="notice">Sorry, no matching vehicles could be found.</p>';
+    }
+    return grid;
+  } catch (error) {
+    console.error("Error in buildClassificationGrid:", error);
+    return '<p class="notice">Sorry, there was an error displaying the vehicle grid.</p>';
+  }
 };
 
 /* ****************************************

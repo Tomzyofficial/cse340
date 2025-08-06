@@ -9,6 +9,22 @@ async function getClassifications() {
   );
 }
 
+/*********** Get the inventory search result *************/
+// This function searches for inventory items by make and also the classification name (case-insensitive).
+// Returns an array of matching rows, or an empty array if none found.
+async function getInvSearchResult(searchTerm, searchTerm) {
+  try {
+    const result = await pool.query(
+      `SELECT * FROM public.inventory AS i JOIN public.classification AS c ON i.classification_id = c.classification_id WHERE i.inv_make ILIKE $1 OR c.classification_name ILIKE $2`,
+      [`%${searchTerm}%`, `%${searchTerm}%`]
+    );
+    return result.rows;
+  } catch (error) {
+    console.error("Get inventory search error:", error);
+    return [];
+  }
+}
+
 /* ***************************
  *  Get all inventory items and classification_name by classification_id
  * ************************** */
@@ -88,6 +104,7 @@ async function addInventoryItem(data) {
 
 module.exports = {
   getClassifications,
+  getInvSearchResult,
   getInventoryByClassificationId,
   getInventoryById,
   addClassification,

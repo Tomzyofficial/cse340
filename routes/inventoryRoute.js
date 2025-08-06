@@ -4,14 +4,21 @@ const router = new express.Router();
 const invController = require("../controllers/invController");
 const utilities = require("../utilities/");
 const { requireEmployeeOrAdmin } = require("../middleware/auth");
+const baseController = require("../controllers/baseController");
 
-// Route to build inventory by classification view (public, no auth)
+// Route to get inventory search result
+router.get(
+  "/result",
+  utilities.handleErrors(baseController.buildInvSearchResult)
+);
+
+// Route to get inventory by classification view (public, no auth)
 router.get(
   "/type/:classificationId",
   utilities.handleErrors(invController.buildByClassificationId)
 );
 
-// Route to build inventory detail view (public, no auth)
+// Route to get inventory detail view (public, no auth)
 router.get(
   "/detail/:invId",
   utilities.handleErrors(invController.buildDetailView)
